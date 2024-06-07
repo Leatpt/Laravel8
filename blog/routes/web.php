@@ -18,4 +18,4 @@ Route::get('posts/{post}', function ($slug) { //wrapping in {} makes it into a w
     return view('post', [
         'post' => $post
     ]);
-});
+})->where('post', '[A-z_\-]+');
