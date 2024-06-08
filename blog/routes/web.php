@@ -12,5 +12,9 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function ($slug) { //wrapping in {} makes it into a wildcard
-    return view('post', ['post' => Post::find($slug)]);
-})->where('post', '[A-z_\-]+');
+    $post = Post::findorFail($slug);
+
+    return view('post', [
+        'post' => $post
+    ]);
+});
