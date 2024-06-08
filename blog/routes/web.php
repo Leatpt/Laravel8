@@ -11,9 +11,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('posts/{post}', function ($id) { //wrapping in {} makes it into a wildcard
-    $post = Post::findorFail($id);
-
+Route::get('posts/{post:slug}', function (Post $post) { //wrapping in {} makes it into a wildcard
     return view('post', [
         'post' => $post
     ]);
