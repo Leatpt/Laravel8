@@ -16,3 +16,10 @@ Route::get('posts/{post:slug}', function (Post $post) { //wrapping in {} makes i
         'post' => $post
     ]);
 });
+
+Route::get('categories/{categories}', function (Category $category) {
+
+    return view('posts', [
+        'posts' => $category->posts
+    ]);
+});
