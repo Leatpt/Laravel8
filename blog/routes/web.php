@@ -10,7 +10,8 @@ Route::get('/', function () {
     $posts = Post::latest()->get();
 
     return view('posts', [
-        'posts' => $posts
+        'posts' => $posts,
+        'categories' => Category::all()
     ]);
 });
 
@@ -22,8 +23,10 @@ Route::get('posts/{post:slug}', function (Post $post) { //wrapping in {} makes i
 
 Route::get('categories/{category:slug}', function (Category $category) {
 
+
     return view('posts', [
         'posts' => $category->posts,
+        'currentCategory' => $category,
         'categories' => Category::all()
     ]);
 });
