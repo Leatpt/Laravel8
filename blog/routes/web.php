@@ -5,7 +5,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $posts = Post::all();
+
+    $posts = Post::with('category')->get();
 
     return view('posts', [
         'posts' => $posts
