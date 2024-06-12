@@ -33,7 +33,10 @@ class Post extends Model
                 $query->where('username', $author))
         );
     }
-
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function category()
     {
         return $this->belongsTo(Category::class); //hasOne, hasMany, belongsTo, belongsToMany
