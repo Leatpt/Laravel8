@@ -33,6 +33,10 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    // public function setPasswordAttribute()
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
     protected function casts(): array
     {
         return [
