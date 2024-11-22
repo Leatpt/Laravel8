@@ -6,6 +6,25 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('ping', function () {
+
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us10'
+    ]);
+
+    try {
+        $response = $mailchimp->lists->addListMember('a95713ca93', [
+            'email_address' => 'lubowitz.austyn@gmail.com',
+            'status' => 'subscribed',
+        ]);
+    } catch (\GuzzleHttp\Exception\RequestException $ex) {
+        return $ex->getResponse()->getBody()->getContents();
+    }
+});
+
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
