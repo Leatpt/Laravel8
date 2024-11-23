@@ -6,7 +6,8 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('ping', function () {
+Route::post('newsletter', function () {
+    request()->validate(['email' => 'required | email']);
 
     $mailchimp = new \MailchimpMarketing\ApiClient();
 
@@ -17,12 +18,16 @@ Route::get('ping', function () {
 
     try {
         $response = $mailchimp->lists->addListMember('a95713ca93', [
-            'email_address' => 'lubowitz.austyn@gmail.com',
+            'email_address' => request('email'),
             'status' => 'subscribed',
         ]);
-    } catch (\GuzzleHttp\Exception\RequestException $ex) {
-        return $ex->getResponse()->getBody()->getContents();
+    } catch (\Exception $e) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email could not be added to our newsletter list.'
+        ]);
     }
+
+    return redirect('/')->with('success', 'You are now signed up for our newsletter!');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('home');
