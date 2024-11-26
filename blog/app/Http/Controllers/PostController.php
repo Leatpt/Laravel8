@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Gate;
 use App\Models\Category;
 use App\Http\Controllers\Response;
 use Illuminate\Validation\Rule;
