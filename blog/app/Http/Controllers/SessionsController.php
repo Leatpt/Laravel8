@@ -13,8 +13,8 @@ class SessionsController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         if (!auth()->attempt($attributes)) {

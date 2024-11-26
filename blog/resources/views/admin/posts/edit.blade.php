@@ -4,8 +4,8 @@
             @csrf
             @method('PATCH')
 
-            <x-form.input name="title" :value="old('title', $post->title)" />
-            <x-form.input name="slug" :value="old('slug', $post->slug)" />
+            <x-form.input name="title" :value="old('title', $post->title)" required />
+            <x-form.input name="slug" :value="old('slug', $post->slug)" required />
 
             <div class="flex mt-6">
                 <div class="flex-1">
